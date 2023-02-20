@@ -5,8 +5,8 @@ import { setTypes, setBrands, setDevices, setTotalCount } from "../store/slices/
 import { fetchBrands, fetchTypes, fetchParamsDevices } from "../http/deviceApi"
 import Pages from "../components/mainPage/Pages"
 import { setUser, setIsAuth } from "../store/slices/userSlice"
-import TypeBar2 from "../components/mainPage/TypeBar"
-import BrandBar2 from "../components/mainPage/BrandBar"
+import TypeBar from "../components/mainPage/TypeBar"
+import BrandBar from "../components/mainPage/BrandBar"
 
 import DeviceList from "../components/DeviceList"
 import CircularProgress from '@mui/material/CircularProgress';
@@ -51,10 +51,10 @@ const Shop = () => {
       <Container >
          <Grid  container spacing={2}>
             <Grid item>
-               <TypeBar2/>
+               <TypeBar/>
             </Grid>
             <Grid item xs>
-               <BrandBar2/>
+               <BrandBar/>
                <DeviceList devices={devices}/>
                <Pages/>
             </Grid>

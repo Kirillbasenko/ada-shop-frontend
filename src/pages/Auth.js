@@ -37,6 +37,8 @@ const Auth = () => {
       }
    }
 
+   console.log(localStorage.getItem("role"));
+
    const formik = useFormik({
       initialValues:{
          email: "",
