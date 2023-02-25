@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRef } from 'react';
-import { Link, useLocation, useNavigate,  } from "react-router-dom";
+import { json, Link, useLocation, useNavigate,  } from "react-router-dom";
 import { useDispatch } from "react-redux"
 
 import { setIsAuth, setUser } from "../store/slices/userSlice";
@@ -31,13 +31,12 @@ const Auth = () => {
          dispatch(setIsAuth(true))
          localStorage.setItem("role", data.role)
          dispatch(setUser(data))
+         console.log(data);
          navigate(`${SHOP_ROUTE}`, { replace: true })
       }catch(e){
          error.current.style.display = "block"
       }
    }
-
-   console.log(localStorage.getItem("role"));
 
    const formik = useFormik({
       initialValues:{

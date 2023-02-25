@@ -18,7 +18,7 @@ const TypeBar = () => {
 
    const { types, selectedType } = useSelector(state => state.device)
 
-   const icons = [<KitchenIcon/>, <PhoneIphoneIcon/>, <TvIcon/>, <LaptopMacIcon/>]
+   const icons = [<KitchenIcon/>, <LaptopMacIcon/>, <PhoneIphoneIcon/>, <TvIcon/>, ]
 
    return(
       <nav aria-label="main mailbox folders">
@@ -36,14 +36,12 @@ const TypeBar = () => {
             </ListItemButton>
             {types.map((type, index) => {
                return(
-                  
                      <ListItemButton
-                        key={type.id}
-                        selected={selectedType === type.id}
+                        key={type._id}
+                        selected={selectedType === type._id}
                         onClick={() => {
-                           dispatch(setSelectedType(type.id))
-                        }}
-                     >
+                           dispatch(setSelectedType(type._id))
+                        }}>
                         <ListItemIcon>
                            {icons[index]}
                         </ListItemIcon>

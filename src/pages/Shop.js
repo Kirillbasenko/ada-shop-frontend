@@ -24,18 +24,16 @@ const Shop = () => {
       fetchBrands().then(data => dispatch(setBrands(data)))
       fetchParamsDevices(null, null, 1, 6)
          .then(data => {
-            dispatch(setDevices(data.rows))
-            dispatch(setTotalCount(data.count))
-            dispatch(setUser(true))
-            dispatch(setIsAuth(true))
+            dispatch(setDevices(data))
+            dispatch(setTotalCount(data.length))
          })
          .finally(() => setLoading(false))
    }, [])
 
    useEffect(() => {
       fetchParamsDevices(selectedType, selectedBrand, page, limit).then(data => {
-         dispatch(setDevices(data.rows))
-         dispatch(setTotalCount(data.count))
+         dispatch(setDevices(data))
+         dispatch(setTotalCount(data.length))
       })
    }, [page, selectedType, selectedBrand])
 

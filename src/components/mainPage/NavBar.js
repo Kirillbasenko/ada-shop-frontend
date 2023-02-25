@@ -25,13 +25,13 @@ const NavBar = () => {
    const [basketVisible, setBasketVisible] = useState(false)
    const [successVisible, setSuccessVisible] = useState(false)
 
-   const { user } = useSelector(state => state.user)
+   const { isAuth } = useSelector(state => state.user)
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
 
    const logOut = () => {
-      dispatch(setIsAuth({}))
-      dispatch(setUser(false))
+      dispatch(setIsAuth(false))
+      dispatch(setUser({}))
       localStorage.removeItem("token")
       localStorage.removeItem("role")
       localStorage.removeItem("userName")
@@ -42,7 +42,7 @@ const NavBar = () => {
          <AppBar sx={{backgroundColor: "#e9e9e9"}} color='transparent' position="static">
          <Toolbar style={{display: "flex", justifyContent: "space-between" }}>
             <Link style={{ textDecoration: "none", fontSize: 23}} component="div" to={SHOP_ROUTE}>ADASHOP</Link>
-               {user ? 
+               {localStorage.getItem("token") ? 
                   <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center"}}>
                      {localStorage.getItem("role") === "ADMIN" && location.pathname !== ADMIN_ROUTE ?
                         <IconButton 

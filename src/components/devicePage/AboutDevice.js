@@ -8,7 +8,6 @@ import { fetchParamsDevices } from '../../http/deviceApi';
 import { setDevices, setTotalCount } from "../../store/slices/deviceSlice"
 import DeviceList from '../DeviceList';
 import CharacteristicsDecive from './CharacteristicsDecive';
-import ReviewsDecive from './ReviewsDevice';
 
 import Grid from '@mui/material/Grid';
 import CardMedia from '@mui/material/CardMedia';
@@ -28,24 +27,25 @@ const AboutDevice = ({device, deviceInfo}) => {
    const { devices, selectedType, selectedBrand, page, limit } = useSelector(state => state.device)
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
+   const { isAuth } = useSelector(state => state.user)
 
    useEffect(() => {
       fetchParamsDevices(selectedType, selectedBrand, page, limit).then(data => {
-         dispatch(setDevices(data.rows))
-         dispatch(setTotalCount(data.count))
+         dispatch(setDevices(data))
+         dispatch(setTotalCount(data.length))
       })
    }, [page, selectedType, selectedBrand])
 
-   const checkBasket = basket.filter(item => item.id === device.id)
-   const checkFavorite = favorite.filter(item => item.id === device.id)
-   const filterDevices = devices.filter(item => item.id !== device.id)
+   const checkBasket = basket.filter(item => item._id === device._id)
+   const checkFavorite = favorite.filter(item => item._id === device._id)
+   const filterDevices = devices.filter(item => item._id !== device._id)
 
    return(
       <Container sx={{margin: 0, padding: 0}}>
          <Grid sx={{marginTop: 2}} container spacing={2}>
             <Grid item xs>
                <CardMedia component="img" sx={{ height: 400, width: 350, objectFit: "contain" }} src={process.env.REACT_APP_API_URL + device.img}/>
-               <CardContent sx={{ display: 'flex', marginBottom: 2, flexWrap: "wrap" }}>
+               <CardContent sx={{ display: 'flex', marginBottom: 2, flexWrap: "wrap", padding: 0 }}>
                   {device.info.map(item => {
                      return <Typography key={item.id}>{item.description}/</Typography>
                   })}
@@ -68,12 +68,14 @@ const AboutDevice = ({device, deviceInfo}) => {
                         onClick={() => dispatch(setBasket(device))}
                         color={!checkBasket.length ? "success" : "error"} 
                         sx={{fontSize: 12, marginRight: 3}} 
+                        disabled={!isAuth}
                         variant="contained">
                         {!checkBasket.length ? "Добавить в корзину" : "Удалить из корзины"}
                      </Button>
-                     <IconButton onClick={() => dispatch(setFavorite(device))} sx={{ color: "red" }}>
-                        {!checkFavorite.length ? <FavoriteBorderIcon />: <FavoriteIcon/>}
-                     </IconButton>
+                     {isAuth ? <IconButton onClick={() => dispatch(setFavorite(device))} sx={{ color: "red" }}>
+                                 {!checkFavorite.length ? <FavoriteBorderIcon />: <FavoriteIcon/>}
+                              </IconButton>
+                     : null}
                   </CardContent>
                </Card>
             </Grid>
@@ -87,9 +89,7 @@ const AboutDevice = ({device, deviceInfo}) => {
             <Grid item xs>
                <CharacteristicsDecive deviceInfo={deviceInfo}/>
             </Grid>
-            <Grid item xs>
-               <ReviewsDecive device={device}/>
-            </Grid>
+            <Grid item xs></Grid>
          </Grid>
          
       </Container>

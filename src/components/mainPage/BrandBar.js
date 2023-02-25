@@ -5,7 +5,6 @@ import { setSelectedBrand } from "../../store/slices/deviceSlice";
 
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import Container from '@mui/material/Container';
 
 const BrandBar = () => {
    const dispatch = useDispatch(); 
@@ -60,11 +59,11 @@ const BrandBar = () => {
          </Button>
          {selected.map(brand => {
             return(
-               <div key={brand.id}>
+               <div key={brand._id}>
                   <Button 
-                     color={selectedBrand === brand.id ? "success" : 'primary'}
+                     color={selectedBrand === brand._id ? "success" : 'primary'}
                      onClick={() => {
-                        dispatch(setSelectedBrand(brand.id))
+                        dispatch(setSelectedBrand(brand._id))
                      }}>
                      {brand.name}
                   </Button>

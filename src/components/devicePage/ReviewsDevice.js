@@ -16,7 +16,7 @@ const ReviewsDecive = ({device}) => {
 
    useEffect(() => {
       fetchReview()
-         .then(data => data.filter(review => review.deviceId === device.id)).then(res => setReviews(res))
+         .then(data => data.filter(review => review.deviceId === device._id)).then(res => setReviews(res))
    }, [open])
 
    return(

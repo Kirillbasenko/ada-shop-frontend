@@ -23,11 +23,12 @@ const DeviceItem = ({device, recommendations}) => {
 
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
+   const { isAuth } = useSelector(state => state.user)
 
-   const navigatePage = () => navigate(`${DEVICE_ROUTE}/${device.id}`)
+   const navigatePage = () => navigate(`${DEVICE_ROUTE}/${device._id}`)
 
-   let checkFavorite = favorite.filter(item => item.id === device.id)
-   let arr = basket.filter(item => item.id === device.id)
+   let checkFavorite = favorite.filter(item => item._id === device._id)
+   let arr = basket.filter(item => item._id === device._id)
 
    return (
       <Card sx={{ width: recommendations ? 150 : 223, margin: 1 }}>
@@ -38,7 +39,7 @@ const DeviceItem = ({device, recommendations}) => {
             width={recommendations ? 150 : 223}
             sx={{objectFit: "contain"}}
             component="img"
-            src={process.env.REACT_APP_API_URL + device.img}
+            src={device.img}
             alt="green iguana"
          />
          <CardContent style={{display: "flex", justifyContent: "space-between", cursor: "default", alignItems: "end"}}>
@@ -50,7 +51,7 @@ const DeviceItem = ({device, recommendations}) => {
                   {device.price} грн
                </Typography>
             </Box>
-            {!recommendations ? 
+            {!recommendations && isAuth ? 
             <Box sx={{display: "flex", flexDirection: "column"}}>
                <IconButton onClick={() => dispatch(setFavorite(device))} sx={{ color: "red" }}>
                         {!checkFavorite.length ? <FavoriteBorderIcon />: <FavoriteIcon/>}

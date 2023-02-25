@@ -45,31 +45,43 @@ const CreateDevice = ({open, handleClose}) => {
    }
 
    const addInfo = () => {
-      setInfo([...info, {title: "", description: "", id: Date.now()}])
+      setInfo([...info, {title: "", description: "", _id: Date.now()}])
    }
 
-   const removeInfo = (id) => {
-      setInfo(info.filter(item => item.id !== id))
+   const removeInfo = (_id) => {
+      setInfo(info.filter(item => item._id !== _id))
    }
 
-   const changeInfo = (key, value, id) => {
-      setInfo(info.map(i => i.id === id ? {...i, [key]: value} : i))
+   const changeInfo = (key, value, _id) => {
+      setInfo(info.map(i => i._id === _id ? {...i, [key]: value} : i))
    }
 
    const selectFile = e => {
       setPhoto(e.target.files[0]);
    }
 
+   console.log(photo);
+   console.log(src);
+
    const addDevice = () => {
       try{
-         const formData = new FormData()
+         /*const formData = new FormData()
          formData.append('name', formik.values.name)
          formData.append('price', formik.values.price)
-         formData.append('img', photo)
+         //formData.append('img', photo)
          formData.append('brandId', formik.values.brandId)
          formData.append('typeId',formik.values.typeId)
-         formData.append('info', JSON.stringify(info))
-         createDevice(formData)
+         formData.append('info', JSON.stringify(info))*/
+         const data = {
+            "name": formik.values.name,
+            "price": formik.values.price,
+            'brandId': formik.values.brandId,
+            'typeId': formik.values.typeId,
+            "img": src
+         }
+         console.log(photo);
+         console.log(data);
+         createDevice(data)
       }catch(e){
          console.log(e);
       }finally{
@@ -77,6 +89,8 @@ const CreateDevice = ({open, handleClose}) => {
          handleClose()
       }
    }
+
+   
 
    const formik = useFormik({
       initialValues:{
@@ -91,9 +105,9 @@ const CreateDevice = ({open, handleClose}) => {
                   .required("Обов'язкове поле"),
          price: Yup.number()
                   .required("Обов'язкове поле"),
-         brandId: Yup.number()
+         brandId: Yup.string()
                   .required("Обов'язкове поле"),
-         typeId: Yup.number()
+         typeId: Yup.string()
                   .required("Обов'язкове поле"),
       }),
       onSubmit: addDevice
@@ -123,7 +137,7 @@ const CreateDevice = ({open, handleClose}) => {
                      value={formik.values.typeId} 
                      onBlur={formik.handleBlur}>
                      {types.map(type => {
-                        return <MenuItem key={type.id} value={type.id}>{type.name}</MenuItem>
+                        return <MenuItem key={type._id} value={type._id}>{type.name}</MenuItem>
                      })}
                   </Select>
                </FormControl>
@@ -138,7 +152,7 @@ const CreateDevice = ({open, handleClose}) => {
                      value={formik.values.brandId} 
                      onBlur={formik.handleBlur}>
                      {brands.map(brand => {
-                        return <MenuItem key={brand.id} value={brand.id}>{brand.name}</MenuItem>
+                        return <MenuItem key={brand._id} value={brand._id}>{brand.name}</MenuItem>
                      })}
                   </Select>
                </FormControl>
@@ -187,16 +201,16 @@ const CreateDevice = ({open, handleClose}) => {
                            label="Название свойства" 
                            name="name"
                            value={i.title}
-                           onChange={(e) => changeInfo("title", e.target.value, i.id)}
+                           onChange={(e) => changeInfo("title", e.target.value, i._id)}
                            variant="outlined" />
                         <TextField
                            id="outlined-basic" 
                            label="Описание свойства" 
                            name="name"
                            value={i.description}
-                           onChange={(e) => changeInfo("description", e.target.value, i.id)}
+                           onChange={(e) => changeInfo("description", e.target.value, i._id)}
                            variant="outlined" />
-                        <Button color="error" onClick={() => removeInfo(i.id)} variant="outlined">Видалити</Button>
+                        <Button color="error" onClick={() => removeInfo(i._id)} variant="outlined">Видалити</Button>
                   </Box>
                )}
                <Box sx={{display: "flex", justifyContent: "space-between", marginTop: 2}}>
