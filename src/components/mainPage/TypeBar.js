@@ -22,7 +22,7 @@ const TypeBar = () => {
 
    console.log(selectedType);
 
-   const icons = [<KitchenIcon/>, <LaptopMacIcon/>, <PhoneIphoneIcon/>, <TvIcon/>, ]
+   const icons = [<KitchenIcon/>, <PhoneIphoneIcon/>, <TvIcon/>, <LaptopMacIcon/> ]
 
    useEffect(() => {
       dispatch(fetchType())
@@ -34,7 +34,6 @@ const TypeBar = () => {
             <ListItemButton
                selected={selectedType === null}
                onClick={() => {
-                  //localStorage.removeItem("role")
                   dispatch(setSelectedType(null))
                }}
             >
@@ -50,7 +49,6 @@ const TypeBar = () => {
                         selected={selectedType === type._id}
                         onClick={() => {
                            dispatch(setSelectedType(type._id))
-                           //localStorage.setItem("role", type._id)
                         }}>
                         <ListItemIcon>
                            {icons[index]}

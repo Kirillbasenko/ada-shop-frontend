@@ -21,23 +21,23 @@ const BrandBar = () => {
    }, [])
 
    switch (selectedType) {
-      case "63f87d6936c7a890d9d228f4":
+      case "63fc64579009550788d61d21":
          selected = []
-         selected.push(brands.items[2])
+         selected.push(brands.items[5])
          selected.push(brands.items[4])
          break;
-      case "63f9ece0a73c3d15c59d3ebe":
+      case "63fc64659009550788d61d23":
          selected = []
          selected.push(brands.items[0])
-         selected.push(brands.items[2])
+         selected.push(brands.items[1])
          break;
-      case 3:
+      case "63fc64719009550788d61d25":
          selected = []
          selected.push(brands.items[2])
          break;
-      case 4:
+      case "63fc64779009550788d61d27":
          selected = []
-         selected.push(brands.items[0])
+         selected.push(brands.items[2])
          selected.push(brands.items[1])
          selected.push(brands.items[3])
          break;
