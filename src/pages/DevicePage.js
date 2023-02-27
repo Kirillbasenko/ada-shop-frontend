@@ -28,18 +28,17 @@ const DevicePage1 = () => {
       fetchOneDevice(id).then(data => setDevice(data))
       fetchParamsDevices(null, null, 1, 100)
          .then(data => {
-            dispatch(setDevices(data.rows))
+            dispatch(setDevices(data))
          })
    }, [id])
 
    useEffect(() => {
-      fetchReview()
-         .then(data => data.filter(review => review.deviceId === device.id))
+      fetchReview(device._id)
          .then(res => res.reduce((summ, current) => {
             return summ + Number(current.rate)
          }, 0) / res.length)
          .then(arr => setRating(arr))
-   }, [rating])
+   }, [rating, device])
 
    return(
       <Box>

@@ -10,8 +10,8 @@ const favoriveSlice = createSlice({
    initialState, 
    reducers: { 
       setFavorite: (state, action) => {
-         let arr = state.favorite.filter(item => item.id === action.payload.id)
-         state.favorite = arr.length === 1 ? state.favorite.filter(item => item.id !== action.payload.id) : [...state.favorite, action.payload]
+         let arr = state.favorite.filter(item => item._id === action.payload._id)
+         state.favorite = arr.length === 1 ? state.favorite.filter(item => item._id !== action.payload._id) : [...state.favorite, action.payload]
          localStorage.setItem("favorite", JSON.stringify(state.favorite))
       },
    } 

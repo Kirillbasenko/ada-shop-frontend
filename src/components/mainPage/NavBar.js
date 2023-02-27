@@ -25,7 +25,7 @@ const NavBar = () => {
    const [basketVisible, setBasketVisible] = useState(false)
    const [successVisible, setSuccessVisible] = useState(false)
 
-   const { isAuth } = useSelector(state => state.user)
+   const { role } = useSelector(state => state.user)
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
 
@@ -41,10 +41,15 @@ const NavBar = () => {
       <Box sx={{ flexGrow: 1 }}>
          <AppBar sx={{backgroundColor: "#e9e9e9"}} color='transparent' position="static">
          <Toolbar style={{display: "flex", justifyContent: "space-between" }}>
-            <Link style={{ textDecoration: "none", fontSize: 23}} component="div" to={SHOP_ROUTE}>ADASHOP</Link>
-               {localStorage.getItem("token") ? 
+            <Link 
+               style={{ textDecoration: "none", fontSize: 23}} 
+               component="div" 
+               to={SHOP_ROUTE}>
+                  ADASHOP
+            </Link>
+               {localStorage.getItem("role") ? 
                   <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center"}}>
-                     {localStorage.getItem("role") === "ADMIN" && location.pathname !== ADMIN_ROUTE ?
+                     {localStorage.getItem("role") === "ADMIN" ?
                         <IconButton 
                            color='primary'
                            sx={{ marginRight: 1 }}
@@ -70,7 +75,11 @@ const NavBar = () => {
                            <FavoriteBorderIcon/>
                         </Badge>
                      </IconButton>: null}
-                     <BasketModal showSuccess={successVisible} onHideSuccess={() => setSuccessVisible(false)} show={basketVisible} onHide={() => setBasketVisible(false)}/>
+                     <BasketModal 
+                        showSuccess={successVisible} 
+                        onHideSuccess={() => setSuccessVisible(false)} 
+                        show={basketVisible} 
+                        onHide={() => setBasketVisible(false)}/>
                      <IconButton color='error' onClick={logOut}>
                         <OutputIcon/>
                      </IconButton>

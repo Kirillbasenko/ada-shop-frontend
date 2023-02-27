@@ -48,7 +48,7 @@ const BasketModal = ({show, onHide}) => {
                {basket.length !== 0 ? basket.map(device => {
                   return(
                      <div 
-                        key={device.id} 
+                        key={device._id} 
                         style={{borderBlockEnd: "1px solid grey", padding: 10}} 
                         className="d-flex flex-column mb-3">
                         <div className="d-flex justify-content-between">
@@ -57,14 +57,14 @@ const BasketModal = ({show, onHide}) => {
                                  className='me-3' 
                                  width={85} 
                                  height={85} 
-                                 src={process.env.REACT_APP_API_URL + device.img}/>
+                                 src={device.img}/>
                               <div className="">{device.name}</div>
                            </div>
                            <Image 
                               style={{marginTop: "30px"}} 
                               width={20} 
                               height={20} 
-                              onClick={() => dispatch(deleteDevice(device.id))}
+                              onClick={() => dispatch(deleteDevice(device._id))}
                               src={close}/>
                         </div>
                         <div  className="d-flex justify-content-start align-items-center">

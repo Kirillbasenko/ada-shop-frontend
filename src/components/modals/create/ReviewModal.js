@@ -17,10 +17,11 @@ const ReviewModal = ({open, handleClose, deviceId}) => {
    const [rating, setRating] = useState(0);
 
    let userName = localStorage.getItem("userName");
+   console.log(deviceId);
 
    const submitReview = async () => {
       const data = await {
-         deviceId: formik.values.deviceId,
+         deviceId: deviceId,
          userName: formik.values.userName,
          positive: formik.values.positive,
          negative: formik.values.negative,
@@ -33,6 +34,7 @@ const ReviewModal = ({open, handleClose, deviceId}) => {
       formik.values.comment = ""
       formik.values.rate = null
       setRating(0)
+      console.log(data);
       setTimeout(() => {
          handleClose()
       }, 1000)
@@ -40,7 +42,6 @@ const ReviewModal = ({open, handleClose, deviceId}) => {
 
    const formik = useFormik({
       initialValues:{
-         deviceId: deviceId,
          userName: userName ? userName : "",
          positive: "",
          negative: "",

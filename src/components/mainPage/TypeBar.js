@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 
 import { setSelectedType } from "../../store/slices/deviceSlice";
+import { fetchType } from "../../store/slices/deviceSlice";
 
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -11,6 +12,7 @@ import TvIcon from '@mui/icons-material/Tv';
 import KitchenIcon from '@mui/icons-material/Kitchen';
 import DataUsageIcon from '@mui/icons-material/DataUsage';
 import LaptopMacIcon from '@mui/icons-material/LaptopMac';
+import { useEffect } from "react";
 
 
 const TypeBar = () => {
@@ -18,14 +20,21 @@ const TypeBar = () => {
 
    const { types, selectedType } = useSelector(state => state.device)
 
+   console.log(selectedType);
+
    const icons = [<KitchenIcon/>, <LaptopMacIcon/>, <PhoneIphoneIcon/>, <TvIcon/>, ]
+
+   useEffect(() => {
+      dispatch(fetchType())
+   }, [])
 
    return(
       <nav aria-label="main mailbox folders">
          <List component="nav" aria-label="main mailbox folders">
             <ListItemButton
-               selected={selectedType == null}
+               selected={selectedType === null}
                onClick={() => {
+                  //localStorage.removeItem("role")
                   dispatch(setSelectedType(null))
                }}
             >
@@ -34,13 +43,14 @@ const TypeBar = () => {
                </ListItemIcon>
                <ListItemText primary="Все" />
             </ListItemButton>
-            {types.map((type, index) => {
+            {types.items.map((type, index) => {
                return(
                      <ListItemButton
                         key={type._id}
                         selected={selectedType === type._id}
                         onClick={() => {
                            dispatch(setSelectedType(type._id))
+                           //localStorage.setItem("role", type._id)
                         }}>
                         <ListItemIcon>
                            {icons[index]}

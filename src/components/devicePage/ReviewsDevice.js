@@ -15,8 +15,8 @@ const ReviewsDecive = ({device}) => {
    const [reviews, setReviews] = useState(null)
 
    useEffect(() => {
-      fetchReview()
-         .then(data => data.filter(review => review.deviceId === device._id)).then(res => setReviews(res))
+      fetchReview(device._id)
+         .then(data => setReviews(data))
    }, [open])
 
    return(
@@ -24,11 +24,11 @@ const ReviewsDecive = ({device}) => {
          <Card sx={{padding: 2, display: "flex", justifyContent: "space-between", marginBottom: 2}}>
             <Typography>Залиште свій відгук про цей товар</Typography>
             <Button onClick={() => setOpen(true)} sx={{fontSize: 12}} variant="outlined">Залишити відгук</Button>
-            <ReviewModal deviceId={device.id} open={open} handleClose={() => setOpen(false)}/>
+            <ReviewModal deviceId={device._id} open={open} handleClose={() => setOpen(false)}/>
          </Card>
-         {reviews ? reviews.sort((a, b) => b.id - a.id).map(review => {
+         {reviews ? reviews.sort((a, b) => b._id - a._id).map(review => {
             return(
-               <Card key={review.id} sx={{marginBottom: 2}}>
+               <Card key={review._id} sx={{marginBottom: 2}}>
                   <Box sx={{display: "flex", padding: 1, justifyContent: "space-between", alignItems: "center"}}>
                      <Box sx={{display: "flex",}}>
                         <AccountCircleIcon/>
@@ -50,7 +50,6 @@ const ReviewsDecive = ({device}) => {
                </Card>
             )
          }) : null}
-         
       </Box>
       
    )

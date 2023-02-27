@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react";
 
-import { setSelectedBrand } from "../../store/slices/deviceSlice";
+import { fetchBrand, setSelectedBrand } from "../../store/slices/deviceSlice";
 
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -13,34 +13,37 @@ const BrandBar = () => {
 
    const {brands, selectedType, selectedBrand} = useSelector(state => state.device)
 
+   console.log(selectedType);
+
    useEffect(() => {
+      dispatch(fetchBrand())
       dispatch(setSelectedBrand(null))
    }, [])
 
    switch (selectedType) {
-      case 1:
+      case "63f87d6936c7a890d9d228f4":
          selected = []
-         selected.push(brands[2])
-         selected.push(brands[4])
+         selected.push(brands.items[2])
+         selected.push(brands.items[4])
          break;
-      case 2:
+      case "63f9ece0a73c3d15c59d3ebe":
          selected = []
-         selected.push(brands[0])
-         selected.push(brands[2])
+         selected.push(brands.items[0])
+         selected.push(brands.items[2])
          break;
       case 3:
          selected = []
-         selected.push(brands[2])
+         selected.push(brands.items[2])
          break;
       case 4:
          selected = []
-         selected.push(brands[0])
-         selected.push(brands[1])
-         selected.push(brands[3])
+         selected.push(brands.items[0])
+         selected.push(brands.items[1])
+         selected.push(brands.items[3])
          break;
    
       default:
-         selected = brands
+         selected = brands.items
          break;
    }
 
@@ -53,7 +56,6 @@ const BrandBar = () => {
             color={selectedBrand === null ? "success" : 'primary'}
             onClick={() => {
                dispatch(setSelectedBrand(null))
-               localStorage.setItem("brand", null)
             }}>
             Все
          </Button>

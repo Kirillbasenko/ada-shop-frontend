@@ -23,7 +23,7 @@ const DeviceItem = ({device, recommendations}) => {
 
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
-   const { isAuth } = useSelector(state => state.user)
+   const { isAuth, role } = useSelector(state => state.user)
 
    const navigatePage = () => navigate(`${DEVICE_ROUTE}/${device._id}`)
 
@@ -51,7 +51,7 @@ const DeviceItem = ({device, recommendations}) => {
                   {device.price} грн
                </Typography>
             </Box>
-            {!recommendations && isAuth ? 
+            {!recommendations && localStorage.getItem("role") ? 
             <Box sx={{display: "flex", flexDirection: "column"}}>
                <IconButton onClick={() => dispatch(setFavorite(device))} sx={{ color: "red" }}>
                         {!checkFavorite.length ? <FavoriteBorderIcon />: <FavoriteIcon/>}

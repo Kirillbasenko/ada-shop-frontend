@@ -10,26 +10,26 @@ const basketSlice = createSlice({
    initialState, 
    reducers: { 
       setBasket: (state, action) => {
-         let arr = state.basket.filter(item => item.id === action.payload.id)
-         state.basket = arr.length === 1 ? state.basket.filter(item => item.id !== action.payload.id) : [...state.basket, action.payload]
+         let arr = state.basket.filter(item => item._id === action.payload._id)
+         state.basket = arr.length === 1 ? state.basket.filter(item => item._id !== action.payload._id) : [...state.basket, action.payload]
          localStorage.setItem("basket", JSON.stringify(state.basket))
       },
       removeBasket: state => {
          state.basket = []
       },
       deleteDevice: (state, action) => {
-         state.basket = state.basket.filter(item => item.id !== action.payload)
+         state.basket = state.basket.filter(item => item._id !== action.payload)
       },
       setPlusCurrent: (state, action) => {
-         let arr = state.basket.filter(item => item.id === action.payload.id)
-         let a = state.basket.filter(item => item.id !== action.payload.id)
+         let arr = state.basket.filter(item => item._id === action.payload._id)
+         let a = state.basket.filter(item => item._id !== action.payload._id)
          arr.forEach(item =>  item.current++)
          a.push(arr[0])
          localStorage.setItem("basket", JSON.stringify(a))
       },
       setMinusCurrent: (state, action) => {
-         let arr = state.basket.filter(item => item.id === action.payload.id)
-         let a = state.basket.filter(item => item.id !== action.payload.id)
+         let arr = state.basket.filter(item => item._id === action.payload._id)
+         let a = state.basket.filter(item => item._id !== action.payload._id)
          arr.forEach(item => {
             if(item.current > 0){
                item.current--

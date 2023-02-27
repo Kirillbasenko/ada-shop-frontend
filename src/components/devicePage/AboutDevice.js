@@ -34,20 +34,20 @@ const AboutDevice = ({device, deviceInfo}) => {
          dispatch(setDevices(data))
          dispatch(setTotalCount(data.length))
       })
-   }, [page, selectedType, selectedBrand])
+   }, [])
 
    const checkBasket = basket.filter(item => item._id === device._id)
    const checkFavorite = favorite.filter(item => item._id === device._id)
-   const filterDevices = devices.filter(item => item._id !== device._id)
+   const filterDevices = devices.items.filter(item => item._id !== device._id)
 
    return(
       <Container sx={{margin: 0, padding: 0}}>
          <Grid sx={{marginTop: 2}} container spacing={2}>
             <Grid item xs>
-               <CardMedia component="img" sx={{ height: 400, width: 350, objectFit: "contain" }} src={process.env.REACT_APP_API_URL + device.img}/>
+               <CardMedia component="img" sx={{ height: 400, width: 350, objectFit: "contain" }} src={device.img}/>
                <CardContent sx={{ display: 'flex', marginBottom: 2, flexWrap: "wrap", padding: 0 }}>
                   {device.info.map(item => {
-                     return <Typography key={item.id}>{item.description}/</Typography>
+                     return <Typography key={item._id}>{item.description}/</Typography>
                   })}
                </CardContent>
                
@@ -68,11 +68,11 @@ const AboutDevice = ({device, deviceInfo}) => {
                         onClick={() => dispatch(setBasket(device))}
                         color={!checkBasket.length ? "success" : "error"} 
                         sx={{fontSize: 12, marginRight: 3}} 
-                        disabled={!isAuth}
+                        disabled={!localStorage.getItem("role")}
                         variant="contained">
                         {!checkBasket.length ? "Добавить в корзину" : "Удалить из корзины"}
                      </Button>
-                     {isAuth ? <IconButton onClick={() => dispatch(setFavorite(device))} sx={{ color: "red" }}>
+                     {localStorage.getItem("role") ? <IconButton onClick={() => dispatch(setFavorite(device))} sx={{ color: "red" }}>
                                  {!checkFavorite.length ? <FavoriteBorderIcon />: <FavoriteIcon/>}
                               </IconButton>
                      : null}

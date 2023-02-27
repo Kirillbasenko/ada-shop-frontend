@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 
-import { setTypes, setBrands, setDevices, setTotalCount } from "../store/slices/deviceSlice"
-import { fetchBrands, fetchTypes, fetchParamsDevices } from "../http/deviceApi"
+import { setDevices, setTotalCount, fetchType, fetchDevice } from "../store/slices/deviceSlice"
+import { fetchBrands, fetchParamsDevices } from "../http/deviceApi"
 import Pages from "../components/mainPage/Pages"
 import { setUser, setIsAuth } from "../store/slices/userSlice"
 import TypeBar from "../components/mainPage/TypeBar"
@@ -16,28 +16,19 @@ import Grid from '@mui/material/Grid';
 
 const Shop = () => {
    const dispatch = useDispatch(); 
-   const [loading, setLoading] = useState(true)
    const { page, selectedType, selectedBrand, limit, devices } = useSelector(state => state.device)
 
    useEffect(() => {
-      fetchTypes().then(data => dispatch(setTypes(data)))
-      fetchBrands().then(data => dispatch(setBrands(data)))
-      fetchParamsDevices(null, null, 1, 6)
-         .then(data => {
-            dispatch(setDevices(data))
-            dispatch(setTotalCount(data.length))
-         })
-         .finally(() => setLoading(false))
+      dispatch(fetchDevice({selectedType, selectedBrand, page, limit}))
    }, [])
 
    useEffect(() => {
       fetchParamsDevices(selectedType, selectedBrand, page, limit).then(data => {
          dispatch(setDevices(data))
-         dispatch(setTotalCount(data.length))
       })
    }, [page, selectedType, selectedBrand])
 
-   if(loading){
+   if(devices.status === "loading"){
       return (
          <Box sx={{ display: 'flex', justifyContent: "center", marginTop: 50 }}>
             <CircularProgress />
@@ -53,7 +44,7 @@ const Shop = () => {
             </Grid>
             <Grid item xs>
                <BrandBar/>
-               <DeviceList devices={devices}/>
+               <DeviceList devices={devices.items}/>
                <Pages/>
             </Grid>
          </Grid>

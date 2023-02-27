@@ -60,26 +60,16 @@ const CreateDevice = ({open, handleClose}) => {
       setPhoto(e.target.files[0]);
    }
 
-   console.log(photo);
-   console.log(src);
-
    const addDevice = () => {
       try{
-         /*const formData = new FormData()
-         formData.append('name', formik.values.name)
-         formData.append('price', formik.values.price)
-         //formData.append('img', photo)
-         formData.append('brandId', formik.values.brandId)
-         formData.append('typeId',formik.values.typeId)
-         formData.append('info', JSON.stringify(info))*/
          const data = {
             "name": formik.values.name,
             "price": formik.values.price,
             'brandId': formik.values.brandId,
             'typeId': formik.values.typeId,
-            "img": src
+            "img": src,
+            "info": info
          }
-         console.log(photo);
          console.log(data);
          createDevice(data)
       }catch(e){
@@ -89,8 +79,6 @@ const CreateDevice = ({open, handleClose}) => {
          handleClose()
       }
    }
-
-   
 
    const formik = useFormik({
       initialValues:{
@@ -136,7 +124,7 @@ const CreateDevice = ({open, handleClose}) => {
                      onChange={formik.handleChange} 
                      value={formik.values.typeId} 
                      onBlur={formik.handleBlur}>
-                     {types.map(type => {
+                     {types.items.map(type => {
                         return <MenuItem key={type._id} value={type._id}>{type.name}</MenuItem>
                      })}
                   </Select>
@@ -151,7 +139,7 @@ const CreateDevice = ({open, handleClose}) => {
                      onChange={formik.handleChange} 
                      value={formik.values.brandId} 
                      onBlur={formik.handleBlur}>
-                     {brands.map(brand => {
+                     {brands.items.map(brand => {
                         return <MenuItem key={brand._id} value={brand._id}>{brand.name}</MenuItem>
                      })}
                   </Select>

@@ -5,7 +5,10 @@ export const createReview = async (review, id) => {
    return data
 }
 
-export const fetchReview = async () => {
-   const {data} = await $host.get("api/review/:id")
+export const fetchReview = async (deviceId) => {
+   const {data} = await $host.get("api/review/:id", {params: {
+      deviceId
+   }})
+   console.log(data);
    return data
 }
