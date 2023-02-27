@@ -32,6 +32,7 @@ const Auth = () => {
          localStorage.setItem("role", data.role)
          dispatch(setUser(data))
          console.log(data);
+         console.log(data.role);
          navigate(`${SHOP_ROUTE}`, { replace: true })
       }catch(e){
          error.current.style.display = "block"
