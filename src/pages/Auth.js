@@ -58,7 +58,7 @@ const Auth = () => {
    return(
       <Container  
          className='d-flex justify-content-center align-items-center'
-         style={{marginTop: "20%"}}>
+         style={{marginTop: 150}}>
          <Card style={{width: 600}} className="p-5">
             <h2 className='m-auto'>{isLogin ? "Авторизація" : "Реєстрація"}</h2>
             <form onSubmit={formik.handleSubmit} className='d-flex flex-column'>
