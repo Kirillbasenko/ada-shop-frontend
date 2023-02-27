@@ -27,7 +27,6 @@ const AboutDevice = ({device, deviceInfo}) => {
    const { devices, selectedType, selectedBrand, page, limit } = useSelector(state => state.device)
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
-   const { isAuth } = useSelector(state => state.user)
 
    useEffect(() => {
       fetchParamsDevices(selectedType, selectedBrand, page, limit).then(data => {

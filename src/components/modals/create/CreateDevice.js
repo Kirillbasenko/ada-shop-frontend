@@ -4,7 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { createDevice } from '../../../http/deviceApi';
-import { styleReview } from '../../../utils/style';
+import { Selected } from '../../../halpers/components';
+import { styleReview } from '../../../halpers/style';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,9 +13,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -70,7 +69,6 @@ const CreateDevice = ({open, handleClose}) => {
             "img": src,
             "info": info
          }
-         console.log(data);
          createDevice(data)
       }catch(e){
          console.log(e);
@@ -104,9 +102,7 @@ const CreateDevice = ({open, handleClose}) => {
    return(
       <Modal
          open={open}
-         onClose={handleClose}
-         aria-labelledby="modal-modal-title"
-         aria-describedby="modal-modal-description">
+         onClose={handleClose}>
          <Box sx={styleReview}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
                Добавити пристрій
@@ -116,38 +112,24 @@ const CreateDevice = ({open, handleClose}) => {
                onSubmit={formik.handleSubmit}>
                <FormControl sx={{marginTop: 2}} fullWidth>
                   <InputLabel id="demo-simple-select-label">Тип пристрою</InputLabel>
-                  <Select
-                     labelId="demo-simple-select-label"
-                     id="demo-simple-select"
-                     label="Тип пристрою"
-                     name="typeId"
-                     onChange={formik.handleChange} 
-                     value={formik.values.typeId} 
-                     onBlur={formik.handleBlur}>
-                     {types.items.map(type => {
-                        return <MenuItem key={type._id} value={type._id}>{type.name}</MenuItem>
-                     })}
-                  </Select>
+                  {Selected("Тип пристрою", "typeId", 
+                     formik.values.typeId, 
+                     types, 
+                     formik.handleChange, 
+                     formik.handleBlur )}
                </FormControl>
                <FormControl sx={{marginTop: 2}} fullWidth>
                   <InputLabel id="demo-simple-select-label">Бренд пристрою</InputLabel>
-                  <Select
-                     labelId="demo-simple-select-label"
-                     id="demo-simple-select"
-                     label="Бренд пристрою"
-                     name="brandId"
-                     onChange={formik.handleChange} 
-                     value={formik.values.brandId} 
-                     onBlur={formik.handleBlur}>
-                     {brands.items.map(brand => {
-                        return <MenuItem key={brand._id} value={brand._id}>{brand.name}</MenuItem>
-                     })}
-                  </Select>
+                  {Selected("Бренд пристрою", 
+                     "brandId", 
+                     formik.values.brandId, 
+                     brands, 
+                     formik.handleChange, 
+                     formik.handleBlur )}
                </FormControl>
                <TextField 
                   sx={{marginTop: 2}} 
                   error={formik.errors.name && formik.touched.name}
-                  id="outlined-basic" 
                   label="Назва пристрою" 
                   name="name"
                   onChange={formik.handleChange} 
@@ -159,7 +141,6 @@ const CreateDevice = ({open, handleClose}) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Вартість пристрою</InputLabel>
                   <OutlinedInput
                      error={formik.errors.price && formik.touched.price}
-                     id="outlined-adornment-amount"
                      onChange={formik.handleChange} 
                      value={formik.values.price} 
                      name="price"
@@ -181,26 +162,28 @@ const CreateDevice = ({open, handleClose}) => {
                   multiple 
                   type="file" />
                </Button>
-               <Button onClick={addInfo} sx={{marginTop: 2}} variant="outlined">Добавити нову властивість</Button>
+               <Button 
+                  onClick={addInfo} 
+                  sx={{marginTop: 2}} 
+                  variant="outlined">
+                     Добавити нову властивість
+               </Button>
                {info.map(i => 
-                  <Box sx={{display: "flex", alignItems: "center", marginTop: 2, justifyContent: "space-between"}} key={i.id}>
+                  <Box sx={{display: "flex", alignItems: "center", marginTop: 2, justifyContent:"space-between"}} key={i.id}>
                         <TextField 
-                           id="outlined-basic" 
                            label="Название свойства" 
                            name="name"
                            value={i.title}
                            onChange={(e) => changeInfo("title", e.target.value, i._id)}
                            variant="outlined" />
                         <TextField
-                           id="outlined-basic" 
                            label="Описание свойства" 
                            name="name"
                            value={i.description}
                            onChange={(e) => changeInfo("description", e.target.value, i._id)}
                            variant="outlined" />
                         <Button color="error" onClick={() => removeInfo(i._id)} variant="outlined">Видалити</Button>
-                  </Box>
-               )}
+                  </Box>)}
                <Box sx={{display: "flex", justifyContent: "space-between", marginTop: 2}}>
                   <Button onClick={() => {
                      handleClose()

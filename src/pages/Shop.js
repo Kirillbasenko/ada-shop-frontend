@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState } from "react"
 
-import { setDevices, setTotalCount, fetchType, fetchDevice } from "../store/slices/deviceSlice"
+import { setDevices, setTotalCount, fetchType, fetchDevice, setPage } from "../store/slices/deviceSlice"
 import { fetchBrands, fetchParamsDevices } from "../http/deviceApi"
 import Pages from "../components/mainPage/Pages"
 import { setUser, setIsAuth } from "../store/slices/userSlice"
@@ -20,12 +20,14 @@ const Shop = () => {
 
    useEffect(() => {
       dispatch(fetchDevice({selectedType, selectedBrand, page, limit}))
+      console.log(page);
    }, [])
 
    useEffect(() => {
       fetchParamsDevices(selectedType, selectedBrand, page, limit).then(data => {
          dispatch(setDevices(data))
       })
+      console.log(page);
    }, [page, selectedType, selectedBrand])
 
    if(devices.status === "loading"){

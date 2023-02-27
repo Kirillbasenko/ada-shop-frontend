@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Rating from '@mui/material/Rating';
 
-
 const ReviewsDecive = ({device}) => {
    const [open, setOpen] = useState(false);
    const [reviews, setReviews] = useState(null)
@@ -51,7 +50,6 @@ const ReviewsDecive = ({device}) => {
             )
          }) : null}
       </Box>
-      
    )
 }
 

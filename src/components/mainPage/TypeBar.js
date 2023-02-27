@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from "react";
 
 import { setSelectedType } from "../../store/slices/deviceSlice";
 import { fetchType } from "../../store/slices/deviceSlice";
@@ -12,20 +13,17 @@ import TvIcon from '@mui/icons-material/Tv';
 import KitchenIcon from '@mui/icons-material/Kitchen';
 import DataUsageIcon from '@mui/icons-material/DataUsage';
 import LaptopMacIcon from '@mui/icons-material/LaptopMac';
-import { useEffect } from "react";
-
 
 const TypeBar = () => {
    const dispatch = useDispatch(); 
 
    const { types, selectedType } = useSelector(state => state.device)
 
-   console.log(selectedType);
-
    const icons = [<KitchenIcon/>, <PhoneIphoneIcon/>, <TvIcon/>, <LaptopMacIcon/> ]
 
    useEffect(() => {
       dispatch(fetchType())
+      dispatch(setSelectedType(null))
    }, [])
 
    return(
@@ -35,8 +33,7 @@ const TypeBar = () => {
                selected={selectedType === null}
                onClick={() => {
                   dispatch(setSelectedType(null))
-               }}
-            >
+               }}>
                <ListItemIcon>
                   <DataUsageIcon />
                </ListItemIcon>
@@ -55,7 +52,6 @@ const TypeBar = () => {
                         </ListItemIcon>
                         <ListItemText primary={type.name} />
                      </ListItemButton>
-                  
                )
             })}
          </List>

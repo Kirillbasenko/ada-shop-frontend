@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { createReview } from '../../../http/reviewApi';
+import { TextFieldCastom } from '../../../halpers/components';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -11,7 +12,7 @@ import Modal from '@mui/material/Modal';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 
-import {styleReview} from '../../../utils/style';
+import {styleReview} from '../../../halpers/style';
 
 const ReviewModal = ({open, handleClose, deviceId}) => {
    const [rating, setRating] = useState(0);
@@ -63,8 +64,7 @@ const ReviewModal = ({open, handleClose, deviceId}) => {
          open={open}
          onClose={handleClose}
          aria-labelledby="modal-modal-title"
-         aria-describedby="modal-modal-description"
-         >
+         aria-describedby="modal-modal-description">
          <Box sx={styleReview}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
                Написати відгук
@@ -81,31 +81,9 @@ const ReviewModal = ({open, handleClose, deviceId}) => {
                   }}
                />
                {formik.errors.rate && formik.touched.rate  ? <div style={{color: "red"}}>{formik.errors.rate}</div> : null}
-               <TextField
-                  sx={{marginTop: 2}}
-                  id="outlined-required"
-                  label="Ваше ім'я"
-                  name="userName"
-                  type="name"
-                  onChange={formik.handleChange} 
-                  value={formik.values.userName} 
-                  onBlur={formik.handleBlur}/>
-               <TextField
-                  sx={{marginTop: 2}}
-                  id="outlined-required"
-                  label="Переваги"
-                  name="positive"
-                  onChange={formik.handleChange} 
-                  value={formik.values.positive} 
-                  onBlur={formik.handleBlur}/>
-               <TextField
-                  sx={{marginTop: 2}}
-                  id="outlined-required"
-                  label="Недоліки"
-                  name="negative"
-                  onChange={formik.handleChange} 
-                  value={formik.values.negative} 
-                  onBlur={formik.handleBlur}/>
+               {TextFieldCastom("Ваше ім'я", "userName", formik.handleChange, formik.values.userName, formik.handleBlur)}
+               {TextFieldCastom("Переваги", "positive", formik.handleChange, formik.values.positive, formik.handleBlur)}
+               {TextFieldCastom("Недоліки", "negative", formik.handleChange, formik.values.negative, formik.handleBlur)}
                <TextField
                   error={formik.errors.comment && formik.touched.comment}
                   required

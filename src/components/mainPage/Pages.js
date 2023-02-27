@@ -1,10 +1,9 @@
 import { Pagination } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react";
-import { fetchParamsDevices } from "../../http/deviceApi";
-import { setTotalCount } from "../../store/slices/deviceSlice";
 
-import { setPage } from "../../store/slices/deviceSlice";
+import { fetchParamsDevices } from "../../http/deviceApi";
+import { setTotalCount, setPage} from "../../store/slices/deviceSlice";
 
 const Pages = () => {
    const dispatch = useDispatch(); 
@@ -17,6 +16,7 @@ const Pages = () => {
       fetchParamsDevices(selectedType, selectedBrand, null, null).then(data => {
          dispatch(setTotalCount(data.length))
       })
+      dispatch(setPage(page))
    }, [selectedType, selectedBrand])
 
    const pages = []

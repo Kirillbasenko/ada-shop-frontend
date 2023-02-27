@@ -13,8 +13,6 @@ const BrandBar = () => {
 
    const {brands, selectedType, selectedBrand} = useSelector(state => state.device)
 
-   console.log(selectedType);
-
    useEffect(() => {
       dispatch(fetchBrand())
       dispatch(setSelectedBrand(null))
@@ -23,8 +21,8 @@ const BrandBar = () => {
    switch (selectedType) {
       case "63fc64579009550788d61d21":
          selected = []
-         selected.push(brands.items[5])
          selected.push(brands.items[4])
+         selected.push(brands.items[0])
          break;
       case "63fc64659009550788d61d23":
          selected = []
@@ -33,7 +31,8 @@ const BrandBar = () => {
          break;
       case "63fc64719009550788d61d25":
          selected = []
-         selected.push(brands.items[2])
+         selected.push(brands.items[5])
+         selected.push(brands.items[0])
          break;
       case "63fc64779009550788d61d27":
          selected = []

@@ -1,14 +1,13 @@
 import { useState } from 'react';
 
 import { createBrand } from '../../../http/deviceApi';
-import {styleReview} from '../../../utils/style';
+import {styleReview} from '../../../halpers/style';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
-
 
 const CreateBrand = ({open, handleClose}) => {
    const [value, setValue] = useState("")

@@ -20,12 +20,12 @@ import Badge from '@mui/material/Badge';
 const NavBar = () => {
    const dispatch = useDispatch(); 
    const navigate = useNavigate() 
-   const location = useLocation()
 
    const [basketVisible, setBasketVisible] = useState(false)
    const [successVisible, setSuccessVisible] = useState(false)
 
-   const { role } = useSelector(state => state.user)
+   const navigatePage = () => navigate(`${ADMIN_ROUTE}`)
+
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
 
@@ -53,9 +53,7 @@ const NavBar = () => {
                         <IconButton 
                            color='primary'
                            sx={{ marginRight: 1 }}
-                           onClick={() => {
-                              navigate(`${ADMIN_ROUTE}`)
-                           }}>
+                           onClick={() => navigatePage()}>
                            <AdminPanelSettingsIcon/>
                         </IconButton>
                         : 

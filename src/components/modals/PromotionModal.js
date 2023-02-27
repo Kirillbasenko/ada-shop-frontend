@@ -3,7 +3,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 
-import { stylePromotion } from '../../utils/style';
+import { stylePromotion } from '../../halpers/style';
 
 const PromotionModal = ({open, handleClose }) => {
    return(

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { createType } from '../../../http/deviceApi';
-import {styleReview} from '../../../utils/style';
+import {styleReview} from '../../../halpers/style';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
