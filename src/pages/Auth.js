@@ -58,7 +58,7 @@ const Auth = () => {
    return(
       <Container  
          className='d-flex justify-content-center align-items-center'
-         style={{marginTop: 200}}>
+         style={{marginTop: "20%"}}>
          <Card style={{width: 600}} className="p-5">
             <h2 className='m-auto'>{isLogin ? "Авторизація" : "Реєстрація"}</h2>
             <form onSubmit={formik.handleSubmit} className='d-flex flex-column'>
@@ -73,33 +73,33 @@ const Auth = () => {
                      name="name"
                      type="name"
                      onBlur={formik.handleBlur}/> : null}
-               <TextField
-                  error={formik.errors.email && formik.touched.email}
-                  className='mt-3'
-                  required
-                  id="outlined-required"
-                  label="Email"
-                  placeholder='Введіть ваш email...'
-                  onChange={formik.handleChange} 
-                  value={formik.values.email} 
-                  name="email"
-                  type='email'
-                  helperText={formik.errors.email && formik.touched.email ? formik.errors.email : null}
-                  onBlur={formik.handleBlur}/>
-               <TextField
-                  error={formik.errors.password && formik.touched.password}
-                  className='mt-3'
-                  id="outlined-password-input"
-                  label="Password"
-                  required
-                  placeholder='Введіть ваш пароль...'
-                  onChange={formik.handleChange} 
-                  value={formik.values.password} 
-                  name="password" 
-                  type="password"
-                  helperText={formik.errors.password && formik.touched.password ? formik.errors.password : null}
-                  onBlur={formik.handleBlur}
-                  />
+                  <TextField
+                     error={formik.errors.email && formik.touched.email}
+                     className='mt-3'
+                     required
+                     id="outlined-required"
+                     label="Email"
+                     placeholder='Введіть ваш email...'
+                     onChange={formik.handleChange} 
+                     value={formik.values.email} 
+                     name="email"
+                     type='email'
+                     helperText={formik.errors.email && formik.touched.email ? formik.errors.email : null}
+                     onBlur={formik.handleBlur}/>
+                  <TextField
+                     error={formik.errors.password && formik.touched.password}
+                     className='mt-3'
+                     id="outlined-password-input"
+                     label="Password"
+                     required
+                     placeholder='Введіть ваш пароль...'
+                     onChange={formik.handleChange} 
+                     value={formik.values.password} 
+                     name="password" 
+                     type="password"
+                     helperText={formik.errors.password && formik.touched.password ? formik.errors.password : null}
+                     onBlur={formik.handleBlur}
+                     />
                {isLogin ? 
                   <div 
                      className='mt-3'>
