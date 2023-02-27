@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRef } from 'react';
-import { json, Link, useLocation, useNavigate,  } from "react-router-dom";
+import { Link, useLocation, useNavigate,  } from "react-router-dom";
 import { useDispatch } from "react-redux"
 
 import { setIsAuth, setUser } from "../store/slices/userSlice";
@@ -28,11 +28,9 @@ const Auth = () => {
          }else{
             data = await registration(formik.values.email, formik.values.password, formik.values.name)
          }
-         dispatch(setIsAuth(true))
          localStorage.setItem("role", data.role)
+         dispatch(setIsAuth(true))
          dispatch(setUser(data))
-         console.log(data);
-         console.log(data.role);
          navigate(`${SHOP_ROUTE}`, { replace: true })
       }catch(e){
          error.current.style.display = "block"
@@ -60,36 +58,31 @@ const Auth = () => {
          className='d-flex justify-content-center align-items-center'
          style={{marginTop: 150}}>
          <Card style={{width: 600}} className="p-5">
-            <h2 className='m-auto'>{isLogin ? "Авторизація" : "Реєстрація"}</h2>
+            <h2>{isLogin ? "Авторизація" : "Реєстрація"}</h2>
             <form onSubmit={formik.handleSubmit} className='d-flex flex-column'>
                {!isLogin ? 
                   <TextField
                      className='mt-3'
-                     id="outlined-required"
                      label="Name"
                      placeholder="Введіть ваше ім'я..."
                      onChange={formik.handleChange} 
                      value={formik.values.name} 
                      name="name"
-                     type="name"
                      onBlur={formik.handleBlur}/> : null}
                   <TextField
                      error={formik.errors.email && formik.touched.email}
                      className='mt-3'
                      required
-                     id="outlined-required"
                      label="Email"
                      placeholder='Введіть ваш email...'
                      onChange={formik.handleChange} 
                      value={formik.values.email} 
                      name="email"
-                     type='email'
                      helperText={formik.errors.email && formik.touched.email ? formik.errors.email : null}
                      onBlur={formik.handleBlur}/>
                   <TextField
                      error={formik.errors.password && formik.touched.password}
                      className='mt-3'
-                     id="outlined-password-input"
                      label="Password"
                      required
                      placeholder='Введіть ваш пароль...'

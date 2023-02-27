@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { formatDistance, subDays } from 'date-fns'
+import { formatDistance, subDays, add, format  } from 'date-fns'
 
 import ReviewModal from '../modals/create/ReviewModal';
 import { fetchReview } from '../../http/reviewApi';
@@ -12,6 +12,7 @@ import Rating from '@mui/material/Rating';
 const ReviewsDecive = ({device}) => {
    const [open, setOpen] = useState(false);
    const [reviews, setReviews] = useState(null)
+
 
    useEffect(() => {
       fetchReview(device._id)
@@ -35,7 +36,8 @@ const ReviewsDecive = ({device}) => {
                      </Box>
                      <Typography 
                         sx={{fontSize: 12}}>
-                        {formatDistance(subDays(new Date(review.createdAt), 1), new Date(), { addSuffix: true })}
+                        {formatDistance(subDays(new Date(review.createdAt), 0), new Date(), { addSuffix: true })}
+                        
                      </Typography>
                   </Box>
                   <Card sx={{borderRadius: "0px 0px 0px 0px", padding: 1}}>
