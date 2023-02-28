@@ -22,7 +22,7 @@ const ReviewsDecive = ({device}) => {
       <Box>
          <Card sx={{padding: 2, display: "flex", justifyContent: "space-between", marginBottom: 2}}>
             <Typography>Залиште свій відгук про цей товар</Typography>
-            <Button onClick={() => setOpen(true)} sx={{fontSize: 12}} variant="outlined">Залишити відгук</Button>
+            <Button disabled={!localStorage.getItem("role")} onClick={() => setOpen(true)} sx={{fontSize: 12}} variant="outlined">Залишити відгук</Button>
             <ReviewModal deviceId={device._id} open={open} handleClose={() => setOpen(false)}/>
          </Card>
          {reviews ? reviews.sort((a, b) => b._id - a._id).map(review => {
@@ -36,7 +36,6 @@ const ReviewsDecive = ({device}) => {
                      <Typography 
                         sx={{fontSize: 12}}>
                         {formatDistance(subDays(new Date(review.createdAt), 0), new Date(), { addSuffix: true })}
-                        
                      </Typography>
                   </Box>
                   <Card sx={{borderRadius: "0px 0px 0px 0px", padding: 1}}>
