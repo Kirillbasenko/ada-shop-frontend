@@ -1,14 +1,13 @@
 import { useSelector, useDispatch } from "react-redux"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
-import { setDevices, setTotalCount, fetchType, fetchDevice, setPage } from "../store/slices/deviceSlice"
-import { fetchBrands, fetchParamsDevices } from "../http/deviceApi"
+import { setDevices, fetchDevice } from "../store/slices/deviceSlice"
+import { fetchParamsDevices } from "../http/deviceApi"
 import Pages from "../components/mainPage/Pages"
-import { setUser, setIsAuth } from "../store/slices/userSlice"
 import TypeBar from "../components/mainPage/TypeBar"
 import BrandBar from "../components/mainPage/BrandBar"
-
 import DeviceList from "../components/DeviceList"
+
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -20,14 +19,12 @@ const Shop = () => {
 
    useEffect(() => {
       dispatch(fetchDevice({selectedType, selectedBrand, page, limit}))
-      console.log(page);
    }, [])
 
    useEffect(() => {
       fetchParamsDevices(selectedType, selectedBrand, page, limit).then(data => {
          dispatch(setDevices(data))
       })
-      console.log(page);
    }, [page, selectedType, selectedBrand])
 
    if(devices.status === "loading"){

@@ -6,7 +6,6 @@ const initialState = {
    role: localStorage.getItem("role")
 } 
 
-
 const userSlice = createSlice({ 
    name: 'user', 
    initialState, 
@@ -23,6 +22,6 @@ const userSlice = createSlice({
    } 
 }) 
 
-
 export const {setIsAuth, setUser, setRole} = userSlice.actions 
+
 export default userSlice.reducer

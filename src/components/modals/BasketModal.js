@@ -37,8 +37,7 @@ const BasketModal = ({show, onHide}) => {
             onHide={onHide}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
-            centered
-         >
+            centered>
             <Modal.Header closeButton>
                <Modal.Title id="contained-modal-title-vcenter">
                   Кошик

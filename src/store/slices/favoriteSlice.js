@@ -4,7 +4,6 @@ const initialState = {
    favorite: JSON.parse(localStorage.getItem("favorite")) || [],
 } 
 
-
 const favoriveSlice = createSlice({ 
    name: 'favorite', 
    initialState, 
@@ -16,7 +15,6 @@ const favoriveSlice = createSlice({
       },
    } 
 }) 
-
 
 export const { 
    setFavorite,

@@ -4,6 +4,7 @@ import * as Yup from "yup";
 
 import { createReview } from '../../../http/reviewApi';
 import { TextFieldCastom } from '../../../halpers/components';
+import {styleReview} from '../../../halpers/style';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,13 +13,10 @@ import Modal from '@mui/material/Modal';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 
-import {styleReview} from '../../../halpers/style';
-
 const ReviewModal = ({open, handleClose, deviceId}) => {
    const [rating, setRating] = useState(0);
 
    let userName = localStorage.getItem("userName");
-   console.log(deviceId);
 
    const submitReview = async () => {
       const data = await {

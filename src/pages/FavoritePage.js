@@ -8,8 +8,6 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { Card, Typography } from "@mui/material";
 
-
-
 const FavoritePage = () => {
    let navigate = useNavigate() 
 

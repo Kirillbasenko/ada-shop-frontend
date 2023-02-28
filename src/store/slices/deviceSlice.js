@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"; 
-import { $host, $authHost} from "../../http/index.js"
+import { $host } from "../../http/index.js"
 
 export const fetchType = createAsyncThunk("api/fetchType", async () => {
    const {data} = await $host.get("api/type")
@@ -40,7 +40,6 @@ const initialState = {
    limit: 6,
    count: 1
 } 
-
 
 const deviceSlice = createSlice({ 
    name: 'device', 
@@ -90,7 +89,6 @@ const deviceSlice = createSlice({
          .addDefaultCase(() => {})
    },
 }) 
-
 
 export const {
    setTypes, 

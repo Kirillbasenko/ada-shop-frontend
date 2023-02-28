@@ -28,7 +28,6 @@ const NavBar = () => {
 
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
-   const {role} = useSelector(state => state.user)
 
    const logOut = () => {
       dispatch(setIsAuth(false))

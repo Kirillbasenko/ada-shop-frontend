@@ -40,7 +40,6 @@ const BrandBar = () => {
          selected.push(brands.items[1])
          selected.push(brands.items[3])
          break;
-   
       default:
          selected = brands.items
          break;

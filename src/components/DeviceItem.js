@@ -23,7 +23,6 @@ const DeviceItem = ({device, recommendations}) => {
 
    const { basket } = useSelector(state => state.basket)
    const { favorite } = useSelector(state => state.favorite)
-   const { isAuth, role } = useSelector(state => state.user)
 
    const navigatePage = () => navigate(`${DEVICE_ROUTE}/${device._id}`)
 
