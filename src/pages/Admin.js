@@ -12,8 +12,9 @@ const Admin = () => {
    const [openDevice, setOpenDevice] = useState(false)
    const [openBrand, setOpenBrand] = useState(false)
    const [openType, setOpenType] = useState(false)
+   
 
-   if(!localStorage.getItem("token")){
+   if(!localStorage.getItem("role") === "KIRILLADMIN"){
       navigate("/")
    }
 

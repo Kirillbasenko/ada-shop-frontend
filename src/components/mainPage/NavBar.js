@@ -50,7 +50,7 @@ const NavBar = () => {
             </Link>
                {localStorage.getItem("role") ? 
                   <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center"}}>
-                     {localStorage.getItem("role") === "ADMIN" ?
+                     {localStorage.getItem("role") === "KIRILLADMIN" ?
                         <IconButton 
                            color='primary'
                            sx={{ marginRight: 1 }}

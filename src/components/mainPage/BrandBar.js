@@ -13,8 +13,6 @@ const BrandBar = () => {
 
    const {brands, selectedType, selectedBrand} = useSelector(state => state.device)
 
-   console.log(selectedBrand);
-
    useEffect(() => {
       dispatch(fetchBrand())
       dispatch(setSelectedBrand(null))
