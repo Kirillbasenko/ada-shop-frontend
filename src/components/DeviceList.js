@@ -2,7 +2,7 @@ import DeviceItem from "./DeviceItem";
 
 import Box from '@mui/material/Box';
 
-const DeviceList = ({devices, recommendations}) => {
+const BookList = ({devices, recommendations}) => {
    return(
       <Box component="div"
          sx={{ display: 'flex', mx: '2px', flexWrap: "wrap" }}>
@@ -13,4 +13,4 @@ const DeviceList = ({devices, recommendations}) => {
    )
 }
 
-export default DeviceList
+export default BookList
